@@ -6,7 +6,11 @@
   "type": "module",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node index.js"
+    "start": "node index.js",
+    "build": "babel src --out-dir migrations -d dist",
+    "migrate:up": "knex --knexfile=./knexfile.cjs migrate:up --esm --env staging",
+    "migrate:down": "knex --knexfile=./knexfile.cjs migrate:down --esm --env staging"
+
   },
   "repository": {
     "type": "git",
@@ -22,9 +26,16 @@
     "db-migrate-pg": "^1.2.2",
     "dotenv": "^16.0.3",
     "express": "^4.18.2",
+    "knex": "^2.4.2",
     "node-pg-migrate": "^6.2.2",
     "pg": "^8.10.0",
     "postgres-migrations": "^5.3.0",
     "twilio": "^4.8.0"
+  },
+  "devDependencies": {
+    "@babel/cli": "^7.21.0",
+    "@babel/core": "^7.21.3",
+    "@babel/plugin-transform-modules-commonjs": "^7.21.2",
+    "@babel/preset-env": "^7.20.2"
   }
 }
